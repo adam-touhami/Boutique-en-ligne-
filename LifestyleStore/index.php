@@ -53,32 +53,8 @@ $categories = mysqli_fetch_all($categories);
                         </div>
                     </div>
                 <?php } ?>
-                   <div class="col-xs-4">
-                       <div class="thumbnail">
-                           <a href="products.php">
-                               <img src="img/watch.jpg" alt="Watch">
-                           </a>
-                           <center>
-                                <div class="caption">
-                                    <p id="autoResize">Iphone</p>
-                                    <p>Original watches from the best brands.</p>
-                                </div>
-                           </center>
-                       </div>
-                   </div>
-                   <div class="col-xs-4">
-                       <div class="thumbnail">
-                           <a href="products.php">
-                               <img src="img/shirt.jpg" alt="Shirt">
-                           </a>
-                           <center>
-                               <div class="caption">
-                                   <p id="autoResize">Shirts</p>
-                                   <p>Our exquisite collection of shirts.</p>
-                               </div>
-                           </center>
-                       </div>
-                   </div>
+                   
+                    
                </div>
            </div>
             <br><br> <br><br><br><br>

@@ -60,7 +60,7 @@
                                                 echo '<a href="#" class=btn btn-block btn-success disabled>Added to cart</a>';
                                             }else{
                                                 ?>
-                                                <a href="cart_add.php?id=<?= $product[0] ?>" class="btn btn-block btn-primary" name="add" value="add" class="btn btn-block btr-primary">Add to cart</a>
+                                                <a href="cart_add.php?id=<?= $product[0] ?>&category_id=<?= $_GET['category_id'] ?>" class="btn btn-block btn-primary" name="add" value="add" class="btn btn-block btr-primary">Add to cart</a>
                                                 <?php
                                             }
                                         }

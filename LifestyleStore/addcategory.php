@@ -15,18 +15,14 @@ else
 {
     header('location: login.php');
 }
-$errors = [];
-$categories = mysqli_query($con, 'SELECT * FROM categories ORDER BY display_order ');
-$categories = mysqli_fetch_all($categories);
-     function checkLogo()
+    function checkLogo()
     {
         $type = pathinfo($_FILES["picture"]["name"], PATHINFO_EXTENSION);
         $output = [
             'type' => $type
         ];
-        
         if (!in_array("." . $type, ['.PNG', '.jpg', '.jpeg'])) {
-            $output['error'] = "Image format allowed : " . implode(", ", ['.png', '.jpg', '.jpeg']);
+            $output['error'] = "Format d'image autorisé: " . implode(", ", ['.png', '.jpg', '.jpeg']);
         }
         return $output;
     }
@@ -34,10 +30,9 @@ $categories = mysqli_fetch_all($categories);
     
      function setLogo($db)
     {
-        $items = mysqli_query($db, 'SELECT id FROM items WHERE id = ' . mysqli_insert_id($db));
-        $items = mysqli_fetch_assoc($items);
-        $pathAvatar = 'data/product/';
-        $name = $items['id'] . ".jpg";
+    
+        $pathAvatar = 'data/category/';
+        $name = mysqli_insert_id($db) . ".jpg";
         foreach (scandir($pathAvatar) as $avatar) {
             if (pathinfo($avatar, PATHINFO_FILENAME) == pathinfo($name, PATHINFO_FILENAME)) {
                 $path = $pathAvatar . $avatar;
@@ -46,24 +41,23 @@ $categories = mysqli_fetch_all($categories);
         }
         move_uploaded_file($_FILES["picture"]["tmp_name"], $pathAvatar . $name);
     }
-if(!empty($_POST))
-{
-    
-    $title = $_POST['title'];
-    $price = $_POST['price'];
-    $categoryId = $_POST['category_id'];
-    $checkLogo = checkLogo();
-    if(!empty($checkLogo['error']))
+    if(!empty($_POST))
     {
-        $errors[] = $checkLogo['error'];
+        $categoryName = htmlentities($_POST['title']);
+        $description = htmlentities($_POST['description']);
+        $displayOrder = $_POST['display_order'];
+        $errors = [];
+        $checkLogo = checkLogo();
+        if(!empty($checkLogo['error']))
+        {
+            $errors[] = $checkLogo['error'];
+        }
+        if(empty($errors))
+        {
+            mysqli_query($con, 'INSERT INTO categories(title, description, display_order) VALUE("' . $categoryName . '", "' . $description . '",  ' . $displayOrder . ')');
+            setLogo($con);
+        }        
     }
-    if(empty($errors))
-    {
-        mysqli_query($con, 'INSERT INTO items(name, price, category_id) VALUE("' . $title . '", ' . $price . ',  ' . $categoryId . ')');
-        setLogo($con);
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -81,22 +75,19 @@ if(!empty($_POST))
 <body id="add_to_the_product">
     
     <main id="add_to_the_product_main">
-        <form class="#add_to_the_product_main_form" action="addproduct.php" method="POST" enctype="multipart/form-data">
+        <form class="#add_to_the_product_main_form" action="addcategory.php" method="POST"  enctype="multipart/form-data">
         <header>
-    Add Product
+    Add Category
     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
     </header>
             <label for="title"> Title</label>
-            <input class="form_one" type="text" name="title" require> <br>
+            <input class="form_one" type="text" name="title" require id='title'> <br>
+            <label for="description"> Description</label>
+            <input class="form_one" type="text" name="description" id="description"><br>
+            <label for="display_roder"> Display order</label>
+            <input class="form_one" type="number" name="display_order" id="display_order">
             <label for="picture">Picture</label>
             <input class="form_three" type="file" name="picture"> <br>
-            <label for="price">Price</label>
-            <input class="form_two"type="number" name="price" require> <br>
-            <select name="category_id">
-                <?php foreach($categories as $category)  { ?>
-                    <option value="<?= $category[0] ?>"><?= $category[1] ?></option>
-                <?php } ?>
-            </select>
             <button type="submit">Submit</button> <br>
         </form>
         </div>

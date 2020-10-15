@@ -1,4 +1,17 @@
-<nav class="navbar navbar-inverse navabar-fixed-top">
+    <?php
+    $isAdmin = false;
+    if(!empty($_SESSION['id']))
+    {
+        $user = mysqli_query($con, 'SELECT admin FROM users WHERE id = ' . $_SESSION['id'] . ' AND admin = 1');
+        $user = mysqli_fetch_assoc($user);
+        if(!empty($user))
+        {
+            $isAdmin = true;
+        }
+    }
+    
+    ?>
+    <nav class="navbar navbar-inverse navabar-fixed-top">
                <div class="container">
                    <div class="navbar-header">
                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -17,6 +30,10 @@
                            <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                            <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
                            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                           <?php  if($isAdmin) { ?>
+                                <li><a href="addcategory.php"><span class="glyphicon glyphicon-log-out"></span> Add category</a></li>
+                                <li><a href="addproduct.php"><span class="glyphicon glyphicon-log-out"></span> Add product</a></li>
+                           <?php } ?>
                            <?php
                            }else{
                             ?>
