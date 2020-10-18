@@ -37,4 +37,5 @@
         header('location: products.php');
     }
     
+    
  ?>

@@ -108,7 +108,7 @@ header  {
 
 
 #add_to_the_product {
-    background-color: #051937;   
+    background-color: #FA8072;   
 }
 
 
@@ -117,7 +117,7 @@ header  {
     justify-content: space-between;
     justify-content: center;
     border-radius: 15px;
-    box-shadow: 10px 10px 5px #aaaaaa;
+    box-shadow: 10px 10px 5px #b4ddf8;
 
     width: 40%;
     height: 50em;
@@ -128,7 +128,7 @@ header  {
 }
 
 form   {
-    /* display: grid;
+    /* /* display: grid;
     grid-auto-flow: row;
     grid-column-gap: 10px */
     display: flex;
@@ -148,6 +148,10 @@ form   {
   background-position: 10px 10px;
   background-repeat: no-repeat;
   padding-left: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  } */
     
 
 }
@@ -163,7 +167,6 @@ form   {
     font-weight: bold;
     margin-top: 100px;
     margin-left: 50px;
-}
 .form_two {
     width: 25%;
     font-family: 'Roboto', sans-serif;

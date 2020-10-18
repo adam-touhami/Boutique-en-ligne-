@@ -50,6 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="address" placeholder="Address" required="true">
+                                <input type="hidden" class="form-control" name="admin" value="0" placeholder="Address" required="true">
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Sign Up">
@@ -62,8 +63,8 @@
            <footer class="footer">
                <div class="container">
                <center>
-                   <p>Copyright &copy Lifestyle Store. All Rights Reserved. | Contact Us: +91 90000 00000</p>
-                   <p>This website is developed by Sajal Agrawal</p>
+                   <p></p>
+                   <p></p>
                </center>
                </div>
            </footer>
